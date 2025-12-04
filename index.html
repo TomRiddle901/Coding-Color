@@ -8,12 +8,23 @@
     </head>
     <body>
         <div id="header">
-            <h1 id="saluto"></h1>
+            <h1 id="saluto">Oggi è un bel giorno!</h1>
         </div>
-        <div id="title"></div>
-        <div id="input"></div>
+        <div id="title">Codici e Colori</div>
+        <div id="input">
+            <label for="inNumber">Inserisci un numero:</label>
+            <input id="inNumber" placeholder="Inserisci un numero">
+            <br>
+            <label for="inText">Inserisci un testo:</label>
+            <input id="inText" placeholder="Inserisci il testo">
+            <br><br>
+            <button type="button" id="btnElabora" onclick="elabora()">Elabora</button>
+            <button type="button" id="btnReset" onclick="reset()">Cancella</button>
+        </div>
         <div id="output">
-            <p id="out">Output</p>
+            <p id="outText">Output</p>
+        </div>
+        <div>
             <p id="error">Errori</p>
         </div>
         <script src="script.js"></script>
