@@ -11,4 +11,6 @@ function elabora(){
 
 function reset(){
     document.getElementById("inNumber").value = "";
+    document.getElementById("outText").value = "";
+    document.getElementById("error").value = "";
 }
