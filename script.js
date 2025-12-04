@@ -2,5 +2,9 @@ console.log("Inizio Esecuzione Programma");
 
 function elabora(){
     let numero = document.getElementById("inNumber").value;
-    alert(numero);
+    if (numero >= 0 && numero <= 255){
+        alert(numero)
+    } else{
+        alert("Numero non valido!");
+    }
 }
