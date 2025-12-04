@@ -8,3 +8,7 @@ function elabora(){
         alert("Numero non valido!");
     }
 }
+
+function reset(){
+    document.getElementById("inNumber").value = "";
+}
