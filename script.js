@@ -6,57 +6,58 @@ let array = [];
 let numeriInseriti = 0;
 
 // Impostazione del giorno attuale
-document.getElementById("saluto").innerHTML = "Data di oggi: " + data.getDay() + "/" + data.getMonth() + "/" + data.getFullYear();
+document.getElementById("saluto").textContent = "Data di oggi: " +
+    data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear();
 
+// Funzione principale per inserire numero
 function inserisciNumero() {
-    for (let i = 0; i < 3; i++) {
-        if (elabora()) {
-            array.push(numero);
-            console.log("Numero inserito: " + numero);
-        } else {
-            alert("Numero non valido, riprova!");
-            break;
-        }
-    }
-
-    document.getElementById("result").innerHTML = "Numeri inseriti: " + array.join(", ");
+    elabora();
 }
 
-// Funzioni
-function elabora() { // Elabora il numero
+// Funzione di elaborazione
+function elabora() {
     if (numeriInseriti >= 3) {
-        document.getElementById("error").innerHTML = "Errore: hai già inserito 3 numeri!";
+        document.getElementById("error").textContent = "Errore: hai già inserito 3 numeri!";
         return false;
     }
 
     let numero = parseInt(document.getElementById("inNumber").value);
-    if (numero >= 0 && numero <= 255) {
-        document.getElementById("outText").innerHTML = "Hai inserito il numero " + numero;
-        array.push(numero);
-        numeriInseriti++;
-        let out = document.getElementById("outText");
-        out.textContent = "Hai inserito il numero " + numero;
-        out.style.color = "rgb(" + numero + ",0,0)";
-        if (array.length >= 3) {
-            const r = array[0], g = array[1], b = array[2];
-            out.style.color = "rgb(" + r + "," + g + "," + b + ")";
-        } else {
-            out.style.color = "rgb(" + numero + ",0,0)";
-        }
-        document.getElementById("result").innerHTML = "Numeri inseriti: " + array.join(", ");
-        return true;
-    } else {
-        document.getElementById("error").innerHTML = "Errore: il numero " + numero + " non rispetta i criteri, deve essere tra 0 e 255!";
+
+    if (isNaN(numero) || numero < 0 || numero > 255) {
+        document.getElementById("error").textContent = 
+            "Errore: il numero " + numero + " non rispetta i criteri, deve essere tra 0 e 255!";
         return false;
     }
+
+    array.push(numero);
+    numeriInseriti++;
+    document.getElementById("error").textContent = "";
+
+    // Mostra il numero inserito
+    let out = document.getElementById("outText");
+    out.textContent = "Hai inserito il numero " + numero;
+
+    // Se sono già 3 numeri, usa RGB
+    if (array.length === 3) {
+        const [r, g, b] = array;
+        out.style.color = `rgb(${r},${g},${b})`;
+    } else {
+        // Altrimenti usa solo rosso
+        out.style.color = `rgb(${numero},0,0)`;
+    }
+
+    // Mostra tutti i numeri inseriti
+    document.getElementById("result").textContent = "Numeri inseriti: " + array.join(", ");
+    console.log("Numeri inseriti: " + array.join(", "));
+    return true;
 }
 
-// Rimuove tutti i valori e resetta il sito
+// Funzione reset
 function reset() {
     document.getElementById("inNumber").value = "";
-    document.getElementById("outText").innerHTML = "Output";
-    document.getElementById("error").innerHTML = "Errori";
-    document.getElementById("result").innerHTML = "Risultato";
+    document.getElementById("outText").textContent = "Output";
+    document.getElementById("error").textContent = "Errori";
+    document.getElementById("result").textContent = "Risultato";
     array = [];
     numeriInseriti = 0;
     console.log("Reset completato");
