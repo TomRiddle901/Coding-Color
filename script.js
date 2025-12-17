@@ -1,64 +1,54 @@
 console.log("Inizio Esecuzione Programma");
 
-// Variabili
-let data = new Date();
 let array = [];
 let numeriInseriti = 0;
 
-// Impostazione del giorno attuale
-document.getElementById("saluto").textContent = "Data di oggi: " +
-    data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear();
-
-// Funzione principale per inserire numero
-function inserisciNumero() {
-    elabora();
-}
-
-// Funzione di elaborazione
 function elabora() {
-    if (numeriInseriti >= 3) {
-        document.getElementById("error").textContent = "Errore: hai già inserito 3 numeri!";
-        return false;
-    }
-
     let numero = parseInt(document.getElementById("inNumber").value);
 
+    // Controllo validità
     if (isNaN(numero) || numero < 0 || numero > 255) {
-        document.getElementById("error").textContent = 
-            "Errore: il numero " + numero + " non rispetta i criteri, deve essere tra 0 e 255!";
-        return false;
+        document.getElementById("error").textContent =
+            "Errore: il numero deve essere tra 0 e 255!";
+        return;
     }
 
-    array.push(numero);
-    numeriInseriti++;
     document.getElementById("error").textContent = "";
 
-    // Mostra il numero inserito
-    let out = document.getElementById("outText");
-    out.textContent = "Hai inserito il numero " + numero;
-
-    // Se sono già 3 numeri, usa RGB
-    if (array.length === 3) {
-        const [r, g, b] = array;
-        out.style.color = `rgb(${r},${g},${b})`;
+    // Aggiunge numero se non ci sono già 3 numeri
+    if (numeriInseriti < 3) {
+        array.push(numero);
+        numeriInseriti++;
     } else {
-        // Altrimenti usa solo rosso
-        out.style.color = `rgb(${numero},0,0)`;
+        document.getElementById("error").textContent = "Hai già inserito 3 numeri!";
+        return;
     }
 
-    // Mostra tutti i numeri inseriti
-    document.getElementById("result").textContent = "Numeri inseriti: " + array.join(", ");
+    // Mostra i numeri inseriti nel div output
+    document.getElementById("outText").textContent = "Numeri inseriti: " + array.join(", ");
+
+    // Determina colore RGB usando i numeri inseriti
+    let r = array[0] || 0;
+    let g = array[1] || 0;
+    let b = array[2] || 0;
+
+    // Mostra la scritta colorata nel paragrafo result
+    let testo = document.getElementById("inText").value || "Testo da colorare";
+    let result = document.getElementById("result");
+    result.textContent = testo;
+    result.style.color = `rgb(${r},${g},${b})`;
+
     console.log("Numeri inseriti: " + array.join(", "));
-    return true;
 }
 
-// Funzione reset
 function reset() {
     document.getElementById("inNumber").value = "";
+    document.getElementById("inText").value = "";
     document.getElementById("outText").textContent = "Output";
-    document.getElementById("error").textContent = "Errori";
     document.getElementById("result").textContent = "Risultato";
+    document.getElementById("error").textContent = "Errori";
     array = [];
     numeriInseriti = 0;
     console.log("Reset completato");
 }
+console.log("Fine Esecuzione Programma");
