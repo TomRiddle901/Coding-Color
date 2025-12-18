@@ -28,15 +28,15 @@ function elabora() {
     document.getElementById("outText").textContent = "Numeri inseriti: " + array.join(", ");
 
     // Determina colore RGB usando i numeri inseriti
-    let r = array[0] || 0;
-    let g = array[1] || 0;
-    let b = array[2] || 0;
+    let r = array[0];
+    let g = array[1];
+    let b = array[2];
 
     // Mostra la scritta colorata nel paragrafo result
     let testo = document.getElementById("inText").value || "Testo da colorare";
     let result = document.getElementById("result");
     result.textContent = testo;
-    result.style.color = `rgb(${r},${g},${b})`;
+    result.style.color = rgb(r, g, b);
 
     console.log("Numeri inseriti: " + array.join(", "));
 }
