@@ -36,7 +36,7 @@ function elabora() {
     let testo = document.getElementById("inText").value || "Testo da colorare";
     let result = document.getElementById("result");
     result.textContent = testo;
-    result.style.color = rgb(r, g, b);
+    result.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
 
     console.log("Numeri inseriti: " + array.join(", "));
 }
@@ -45,6 +45,7 @@ function reset() {
     document.getElementById("inNumber").value = "";
     document.getElementById("inText").value = "";
     document.getElementById("outText").textContent = "Output";
+    result.style.color = "";
     document.getElementById("result").textContent = "Risultato";
     document.getElementById("error").textContent = "Errori";
     array = [];
